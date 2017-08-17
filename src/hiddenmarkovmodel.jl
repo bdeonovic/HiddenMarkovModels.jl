@@ -1,18 +1,18 @@
-type HiddenMarkovModel <: DynamicDiscreteModel
+mutable struct HiddenMarkovModel <: DynamicDiscreteModel
 	#HMM specific field
 
 	#DynamicDiscreteModel fields
-	m::Array{Float64,4}			  	#the transition matrix given as m[x,y,x',y'] 
-	mu::Array{Float64,2}  			#initial distribution (dx,dy)
-	rho::Array{Float64,1}
-	phi::Array{Float64,1}	
-	psi::Array{Float64,1}
+	m::Array{Float64, 4}		  	#the transition matrix given as m[x,y,x',y'] 
+	mu::Array{Float64, 2}  			#initial distribution (dx,dy)
+	rho::Array{Float64, 1}
+	phi::Array{Float64, 1}	
+	psi::Array{Float64, 1}
 end
 
-function hmm(ab::Tuple,mu)
+function hmm(ab::Tuple, mu)
 	a,b=ab
 	dx,dy=size(mu)
-	model=HiddenMarkovModel(Array(Float64,dx,dy,dx,dy),mu,Array(Float64,1),Array(Float64,dx),Array(Float64,dx))
+  model=HiddenMarkovModel(Array{Float64}(dx,dy,dx,dy),mu,Array{Float64}(1),Array{Float64}(dx),Array{Float64}(dx))
 	hmm2ddm!(model,a,b)
 	model
 end

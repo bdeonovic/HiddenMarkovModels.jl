@@ -6,7 +6,7 @@ rsm(k::Int)=rsm(k,k)
 
 # draw a sparse random stochastic matrix
 function rssm(dim::Int,density=.2)
-	m=Array(Float64,(dim,dim))
+  m=Array{Float64}(dim,dim)
 	for i=1:dim
 		m[i,:]=Base.sprand(1,dim,density)
 		m[i,rand(1:dim)]+=rand()
